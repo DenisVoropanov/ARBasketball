@@ -11,15 +11,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - @IBOutlets
     
     @IBOutlet var sceneView: ARSCNView!
-    @IBOutlet weak var scoreLabel: UILabel!
     
+    @IBOutlet weak var lightButton: UIButton!
     
     // MARK: - Properties
     
     let configuration = ARWorldTrackingConfiguration()
-    
-    var isBallBeginContactWithRim = false
-    var isBallEndContactWithRim = true
+    var lightSwitcher = false
     
     private var isHoopAdded = false {
         didSet {
@@ -28,10 +26,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             sceneView.session.run(configuration, options: .removeExistingAnchors)
         }
     }
-    
-
-    
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -50,7 +44,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Detect vertical planes
         configuration.planeDetection = [.horizontal, .vertical]
-        
         configuration.isLightEstimationEnabled = true
         
         // Run the view's session
@@ -64,10 +57,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
-    
-    
     // MARK: - Private Methods
-
     
     private func getBallNode() -> SCNNode? {
         
@@ -120,27 +110,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let board = scene.rootNode.childNode(withName: "board", recursively: false)!.clone()
         let ring = scene.rootNode.childNode(withName: "ring", recursively: false)!.clone()
-
+        
         
         board.physicsBody = SCNPhysicsBody(
             type: .static,
             shape: SCNPhysicsShape(
                 node: board,
-                options: [
-                    SCNPhysicsShape.Option.type : SCNPhysicsShape.ShapeType.concavePolyhedron
-                ]
+                options: [SCNPhysicsShape.Option.type : SCNPhysicsShape.ShapeType.concavePolyhedron]
             )
         )
- 
+        
         board.physicsBody?.categoryBitMask = BodyType.board.rawValue
         
         ring.physicsBody = SCNPhysicsBody(
             type: .static,
             shape: SCNPhysicsShape(
                 node: ring,
-                options: [
-                    SCNPhysicsShape.Option.type : SCNPhysicsShape.ShapeType.concavePolyhedron
-                ]
+                options: [SCNPhysicsShape.Option.type : SCNPhysicsShape.ShapeType.concavePolyhedron]
             )
         )
         
@@ -154,10 +140,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     private func getPlaneNode(for plane: ARPlaneAnchor) -> SCNNode {
         
-        let extent = plane.extent
-        
-        let plane = SCNPlane(width: CGFloat(extent.x), height: CGFloat(extent.z))
-        plane.firstMaterial?.diffuse.contents = UIColor.red
+        let plane = SCNPlane(width: 10, height: 10)
+        plane.firstMaterial?.diffuse.contents = UIColor.orange
         
         // Create 75% transparent plane node
         let planeNode = SCNNode(geometry: plane)
@@ -194,20 +178,35 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     private func restartGame() {
         
         isHoopAdded = false
-        
-        isBallBeginContactWithRim = false
-        isBallEndContactWithRim = true
-
         sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
             if node.name != nil {
                 node.removeFromParentNode()
             }
-                
+            
         }
+    }
+    
+    private func lightOnAndOf() {
+        lightSwitcher.toggle()
+        
+        if lightSwitcher {
+            lightButton.tintColor = UIColor.green
+        } else {
+            lightButton.tintColor = UIColor.white
         }
-    
-    
-    
+        
+        let device = AVCaptureDevice.default(for: AVMediaType.video)
+        if ((device?.hasTorch) != nil) {
+            do {
+                try device?.lockForConfiguration()
+                device?.torchMode = device?.torchMode == AVCaptureDevice.TorchMode.on ? .off : .on
+                device?.unlockForConfiguration()
+            }
+            catch {
+                print("Torch couldn't be used")
+            }
+        }
+    }
     
     // MARK: - ARSCNViewDelegate
     
@@ -230,15 +229,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Update plane node
         updatePlaneNode(node, for: planeAnchor)
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        
-        sceneView.scene.rootNode.enumerateChildNodes { node, _ in
-            if node.physicsBody?.categoryBitMask == BodyType.ball.rawValue {
-                removeFromScene(node, fallLengh: -10)
-            }
-        }
     }
     
     // MARK: - @IBActions
@@ -277,9 +267,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
-    @IBAction func restartButtonTapped(_ sender: UIButton) {
+    @IBAction func restartButton(_ sender: UIButton) {
         restartGame()
         
     }
     
+    @IBAction func lightToggleButton(_ sender: UIButton) {
+        lightOnAndOf()
+    }
 }

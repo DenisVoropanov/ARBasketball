@@ -23,39 +23,44 @@
                                     <outletCollection property="gestureRecognizers" destination="r26-Sl-raF" appends="YES" id="Yz5-Fa-fMq"/>
                                 </connections>
                             </arscnView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6s5-DT-Vql">
-                                <rect key="frame" x="349" y="57" width="45" height="31"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" image="restart.circle" catalog="system"/>
-                                <connections>
-                                    <action selector="restartButtonTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="qwW-3n-nRo"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUX-qb-obP">
-                                <rect key="frame" x="186.5" y="65" width="41.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="5as-da-Msn">
+                                <rect key="frame" x="283.5" y="59" width="110.5" height="31"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="17e-ac-uAK">
+                                        <rect key="frame" x="0.0" y="0.0" width="44.5" height="31"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="gray" image="lightbulb.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="lightToggleButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="oxw-jh-Ffe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7K-ti-GhO">
+                                        <rect key="frame" x="65.5" y="0.0" width="45" height="31"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="gray" image="restart.circle.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="restartButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="kaa-Ku-Nlx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" systemColor="systemBlueColor"/>
                         <constraints>
-                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="6s5-DT-Vql" secondAttribute="trailing" constant="20" id="Ctq-dD-6nu"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="5as-da-Msn" secondAttribute="trailing" constant="20" id="5jG-Fc-7A3"/>
                             <constraint firstAttribute="trailing" secondItem="BrB-h1-WRS" secondAttribute="trailing" id="Eg4-mK-NhZ"/>
-                            <constraint firstItem="aUX-qb-obP" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="LX7-PJ-Ugq"/>
-                            <constraint firstItem="aUX-qb-obP" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="21" id="MYh-wp-iKb"/>
-                            <constraint firstItem="6s5-DT-Vql" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aUX-qb-obP" secondAttribute="trailing" constant="8" symbolic="YES" id="STN-B9-mTy"/>
+                            <constraint firstItem="5as-da-Msn" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="15" id="HC6-9J-4no"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="VWE-Hs-5ht"/>
                             <constraint firstAttribute="bottom" secondItem="BrB-h1-WRS" secondAttribute="bottom" id="cP2-Hj-Xat"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="U0K-SW-4ec" secondAttribute="leading" id="m2H-7B-bre"/>
-                            <constraint firstItem="6s5-DT-Vql" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="13" id="qbc-ct-Jhn"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lightButton" destination="17e-ac-uAK" id="L9E-b8-hyR"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
-                        <outlet property="scoreLabel" destination="aUX-qb-obP" id="afQ-HA-Bf6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -69,7 +74,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="restart.circle" catalog="system" width="128" height="121"/>
+        <image name="lightbulb.fill" catalog="system" width="113" height="128"/>
+        <image name="restart.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
