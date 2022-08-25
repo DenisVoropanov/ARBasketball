@@ -120,8 +120,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             )
         )
         
-        board.physicsBody?.categoryBitMask = BodyType.board.rawValue
-        
         ring.physicsBody = SCNPhysicsBody(
             type: .static,
             shape: SCNPhysicsShape(
@@ -130,7 +128,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             )
         )
         
-        ring.physicsBody?.categoryBitMask = BodyType.rim.rawValue
         
         hoopNode.addChildNode(board)
         hoopNode.addChildNode(ring)
@@ -164,14 +161,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let extent = anchor.extent
         plane.width = CGFloat(extent.x)
         plane.height = CGFloat(extent.z)
-        
-    }
-    
-    private func removeFromScene(_ node: SCNNode, fallLengh: Float) {
-        
-        if node.presentation.position.y < fallLengh {
-            node.removeFromParentNode()
-        }
         
     }
     

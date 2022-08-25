@@ -16,7 +16,6 @@
 		3CC7D27E28B5141400B13C0E /* SportARTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC7D27D28B5141400B13C0E /* SportARTests.swift */; };
 		3CC7D28828B5141400B13C0E /* SportARUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC7D28728B5141400B13C0E /* SportARUITests.swift */; };
 		3CC7D28A28B5141400B13C0E /* SportARUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC7D28928B5141400B13C0E /* SportARUITestsLaunchTests.swift */; };
-		3CC7D29728B7FE5C00B13C0E /* BodyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC7D29628B7FE5C00B13C0E /* BodyType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +48,6 @@
 		3CC7D28328B5141400B13C0E /* SportARUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SportARUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CC7D28728B5141400B13C0E /* SportARUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportARUITests.swift; sourceTree = "<group>"; };
 		3CC7D28928B5141400B13C0E /* SportARUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportARUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		3CC7D29628B7FE5C00B13C0E /* BodyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +104,6 @@
 				3CC7D26D28B5141300B13C0E /* Main.storyboard */,
 				3CC7D27028B5141300B13C0E /* Assets.xcassets */,
 				3CC7D27228B5141300B13C0E /* LaunchScreen.storyboard */,
-				3CC7D29628B7FE5C00B13C0E /* BodyType.swift */,
 			);
 			path = SportAR;
 			sourceTree = "<group>";
@@ -260,7 +257,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CC7D29728B7FE5C00B13C0E /* BodyType.swift in Sources */,
 				3CC7D26C28B5141300B13C0E /* ViewController.swift in Sources */,
 				3CC7D26828B5141300B13C0E /* AppDelegate.swift in Sources */,
 			);
